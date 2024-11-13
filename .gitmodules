@@ -1,0 +1,3 @@
+[submodule "libs/ormpp"]
+	path = libs/ormpp
+	url = https://github.com/qicosmos/ormpp
