@@ -90,3 +90,23 @@ Usa el código con precaución.
 3. **Run the API:**
 
 The API will be accessible at http://localhost:3000
+
+## Pending Features
+
+[x] Fast and efficient API using CrowCpp.
+[x] Database connectivity (MySQL, PostgreSQL).
+[ ] Middleware:
+[ ] Apply middleware to specific routes.
+[x] JWT authentication.
+[x] Redis integration.
+[ ] Background tasks and events.
+[ ] WebSocket support.
+[ ] Utility functions in utils.
+[ ] Request validation.
+[ ] RabbitMQ integration.
+[ ] Data export (PDF, CSV).
+[ ] Internationalization (i18n).
+[ ] File handling (upload, save, delete).
+[ ] Testing framework.
+[x] Dockerized environment.
+[ ] Command to generate files.
