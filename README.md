@@ -93,20 +93,22 @@ The API will be accessible at http://localhost:3000
 
 ## Pending Features
 
-[x] Fast and efficient API using CrowCpp.
-[x] Database connectivity (MySQL, PostgreSQL).
-[ ] Middleware:
-[ ] Apply middleware to specific routes.
-[x] JWT authentication.
-[x] Redis integration.
-[ ] Background tasks and events.
-[ ] WebSocket support.
-[ ] Utility functions in utils.
-[ ] Request validation.
-[ ] RabbitMQ integration.
-[ ] Data export (PDF, CSV).
-[ ] Internationalization (i18n).
-[ ] File handling (upload, save, delete).
-[ ] Testing framework.
-[x] Dockerized environment.
-[ ] Command to generate files.
+```table
+| Feature                 | Status      | Notes                                      |
+| ----------------------- | ----------- | -----------------------------------------  |
+| Fast and efficient API  | Complete    | Uses CrowCpp.                              |
+| Database connectivity   | Complete    | Supports MySQL, PostgreSQL.                |
+| Middleware              | In progress | Apply middleware to specific routes.       |
+| JWT authentication      | Complete    |                                            |
+| Redis integration       | Complete    |                                            |
+| Background tasks/events | Pending     |                                            |
+| WebSocket support       | Pending     |                                            |
+| Utility functions       | Pending     | Add common utilities to the `utils` folder |
+| Request validation      | Pending     |                                            |
+| RabbitMQ integration    | Pending     |                                            |
+| Data export (PDF, CSV)  | Pending     |                                            |
+| Internationalization    | Pending     |                                            |
+| File handling           | Pending     |                                            |
+| Testing framework       | Pending     |                                            |
+| Dockerized environment  | Complete    |                                            |
+```
