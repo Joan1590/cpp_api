@@ -32,8 +32,7 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 
 ## Folder Structure
 
-Usa el código con precaución.
-
+```text
 ├── src
 │ ├── libs
 │ ├── scripts
@@ -72,6 +71,7 @@ Usa el código con precaución.
 ├── CMakeLists.txt
 ├── docker-compose.yml
 └── Dockerfile
+```
 
 ## Getting Started
 
