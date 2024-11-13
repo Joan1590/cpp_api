@@ -33,17 +33,17 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 ## Folder Structure
 
 ```text
+├── libs
+├── scripts
+│ └── watch.sh
 ├── src
-│ ├── libs
-│ ├── scripts
-│ │ └── watch.sh
 │ ├── config
 │ │ └── hconfig.hpp
 │ ├── controllers
-│ │ ├── h AuthController.hpp
-│ │ ├── h BaseController.hpp
+│ │ ├── AuthController.hpp
+│ │ ├── BaseController.hpp
 │ │ ├── HelloController.hpp
-│ │ └── h™ UserController.hpp
+│ │ └── UserController.hpp
 │ ├── database
 │ │ └── migrations
 │ │ ├── CreateUsersTable...
@@ -60,14 +60,11 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 │ │ ├── AuthRouter.hpp
 │ │ ├── HelloRouter.hpp
 │ │ ├── RouteManager.hpp
-│ │ ├── h Router.hpp
+│ │ ├── Router.hpp
 │ │ └── UserRouter.hpp
 │ └── utils
-│ └── h HashUtils.hpp
+│ └── HashUtils.hpp
 ├── main.cpp
-├── .dockerignore
-├── .gitignore
-├── .gitmodules
 ├── CMakeLists.txt
 ├── docker-compose.yml
 └── Dockerfile
