@@ -6,12 +6,12 @@
 class Router
 {
 public:
-  static crow::App<> &getApp()
+  static crow::App<Middlewares::JWTMiddleware> &getApp()
   {
-    static crow::App<> app;
+    static crow::App<Middlewares::JWTMiddleware> app;
     return app;
   }
 
-  virtual void register_routes(crow::App<> &app) = 0;
+  virtual void register_routes(crow::App<Middlewares::JWTMiddleware> &app) = 0;
   virtual ~Router() = default;
 };

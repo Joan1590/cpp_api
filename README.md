@@ -95,7 +95,7 @@ The API will be accessible at http://localhost:3000
 | ----------------------- | ----------- | -----------------------------------------  |
 | Fast and efficient API  | Complete    | Uses CrowCpp.                              |
 | Database connectivity   | Complete    | Supports MySQL, PostgreSQL.                |
-| Middleware              | In progress | Apply middleware to specific routes.       |
+| Middleware              | Complete    | Apply middleware to specific routes.       |
 | JWT authentication      | Complete    |                                            |
 | Redis integration       | Complete    |                                            |
 | Background tasks/events | Pending     |                                            |

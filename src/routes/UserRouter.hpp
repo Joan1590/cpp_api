@@ -8,7 +8,7 @@ namespace Routes
   class UserRouter : public Router
   {
   public:
-    void register_routes(crow::App<> &app) override
+    void register_routes(crow::App<Middlewares::JWTMiddleware> &app) override
     {
       CROW_ROUTE(app, "/api/users")
           .methods("GET"_method)([](const crow::request &req)
@@ -23,12 +23,12 @@ namespace Routes
                                   { return Controllers::UserController::create(req); });
 
       CROW_ROUTE(app, "/api/users/<string>")
-          .middlewares<Middlewares::JWTMiddleware>()
+          .CROW_MIDDLEWARES(app, Middlewares::JWTMiddleware)
           .methods("PUT"_method)([](const crow::request &req, std::string id)
                                  { return Controllers::UserController::update(std::stoi(id), req); });
 
       CROW_ROUTE(app, "/api/users/<string>")
-          .middlewares<Middlewares::JWTMiddleware>()
+          .CROW_MIDDLEWARES(app, Middlewares::JWTMiddleware)
           .methods("DELETE"_method)([](const crow::request &req, std::string id)
                                     { return Controllers::UserController::deleteOne(std::stoi(id)); });
     }

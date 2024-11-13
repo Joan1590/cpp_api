@@ -21,7 +21,7 @@ public:
     routers.push_back(std::make_unique<Routes::UserRouter>());
   }
 
-  void register_all_routes(crow::App<> &app)
+  void register_all_routes(crow::App<Middlewares::JWTMiddleware> &app)
   {
     // Register all routes
     for (const auto &router : routers)
