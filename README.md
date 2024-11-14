@@ -81,7 +81,7 @@ The API will be accessible at http://localhost:3000
 | JWT authentication      | Complete    |                                            |
 | Redis integration       | Complete    |                                            |
 | Background tasks/events | Complete    |                                            |
-| WebSocket support       | Pending     |                                            |
+| WebSocket support       | In Progress |                                            |
 | Utility functions       | Pending     | Add common utilities to the `utils` folder |
 | Request validation      | Pending     |                                            |
 | Data export (PDF, CSV)  | Pending     |                                            |
