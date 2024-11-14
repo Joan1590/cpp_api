@@ -15,6 +15,9 @@ namespace Routes
 
       CROW_ROUTE(app, "/api/redis").methods("GET"_method)([](const crow::request &req)
                                                           { return Controllers::HelloController::redis(); });
+
+      CROW_ROUTE(app, "/api/sendMessage").methods("GET"_method)([](const crow::request &req)
+                                                                { return Controllers::HelloController::sendMessage(); });
     }
   };
 }

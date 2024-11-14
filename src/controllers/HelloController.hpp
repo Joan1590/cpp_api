@@ -45,5 +45,22 @@ namespace Controllers
           {"status", "success"}};
       return ok(response);
     }
+
+    // example of send message to event
+    static crow::response sendMessage()
+    {
+      RedisManager redis_manager;
+
+      // Use the Redis connection
+      auto redis = redis_manager.getRedis();
+
+      // create a publisher
+      redis->publish("log", "Hello, world!");
+
+      json response = {
+          {"message", "Message sent to event"},
+          {"status", "success"}};
+      return ok(response);
+    }
   };
 }

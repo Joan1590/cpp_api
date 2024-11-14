@@ -14,24 +14,6 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 
 ## Folder Structure
 
-Markdown
-
-# C++ API Framework (CrowCpp)
-
-This project provides a lightweight and efficient C++ API framework, inspired by Laravel's elegant design, built upon the CrowCpp microframework. It focuses solely on API functionalities, making it ideal for backend development and microservices.
-
-## Features
-
-- **Fast and efficient:** Leverages CrowCpp's performance for handling HTTP requests.
-- **Database connectivity:** Supports seamless integration with MySQL and PostgreSQL.
-- **Middleware:** Provides middleware support for request processing and manipulation.
-- **JWT authentication:** Implements JWT (JSON Web Token) for secure API access.
-- **Redis integration:** Utilizes Redis for caching and session management.
-- **Easy routing:** Offers a simple and intuitive routing system.
-- **Dockerized environment:** Includes Dockerfile and docker-compose for easy setup and deployment.
-
-## Folder Structure
-
 ```text
 ├── libs
 ├── scripts
@@ -98,7 +80,7 @@ The API will be accessible at http://localhost:3000
 | Middleware              | Complete    | Apply middleware to specific routes.       |
 | JWT authentication      | Complete    |                                            |
 | Redis integration       | Complete    |                                            |
-| Background tasks/events | Pending     |                                            |
+| Background tasks/events | Complete    |                                            |
 | WebSocket support       | Pending     |                                            |
 | Utility functions       | Pending     | Add common utilities to the `utils` folder |
 | Request validation      | Pending     |                                            |
