@@ -84,7 +84,6 @@ The API will be accessible at http://localhost:3000
 | WebSocket support       | Pending     |                                            |
 | Utility functions       | Pending     | Add common utilities to the `utils` folder |
 | Request validation      | Pending     |                                            |
-| RabbitMQ integration    | Pending     |                                            |
 | Data export (PDF, CSV)  | Pending     |                                            |
 | Internationalization    | Pending     |                                            |
 | File handling           | Pending     |                                            |
