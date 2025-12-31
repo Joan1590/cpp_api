@@ -40,3 +40,6 @@ x86/
 
 # Uploads
 uploads/
+
+# Environment
+.env

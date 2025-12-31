@@ -94,7 +94,8 @@
     "locale": "cpp",
     "__bit_reference": "cpp",
     "__string": "cpp",
-    "__split_buffer": "cpp"
+    "__split_buffer": "cpp",
+    "__functional_base": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

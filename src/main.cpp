@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
 
   auto &app = Router::getApp();
 
-  // Run threads for EventManager
+  // Start event subscribers
   Events::EventManager eventManager;
-  eventManager.runThreads();
+  eventManager.start();
 
   // Register all routes using RouteManager
   RouteManager routeManager;

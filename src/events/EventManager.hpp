@@ -1,20 +1,27 @@
 #pragma once
 #include "logEvent.hpp"
-#include <thread>
-#include "../redis/RedisManager.hpp"
 
 namespace Events
 {
   class EventManager
   {
-  public:
-    void runThreads()
-    {
-      RedisManager manager;
-      std::thread sub_thread(logEvent);
+  private:
+    LogEventSubscriber logSubscriber_;
 
-      sub_thread.detach();
+  public:
+    void start()
+    {
+      logSubscriber_.start();
+    }
+
+    void stop()
+    {
+      logSubscriber_.stop();
+    }
+
+    bool isRunning() const
+    {
+      return logSubscriber_.isRunning();
     }
   };
-
 }

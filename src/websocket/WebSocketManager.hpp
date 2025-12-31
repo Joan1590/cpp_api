@@ -132,14 +132,39 @@ namespace WebSocket
           std::string userId = payload.value("userId", "");
           setUserId(conn, userId);
         }
+        else if (type == "chat")
+        {
+          // Handle chat messages - send to specified room
+          std::string room = payload.value("room", "general");
+          json chatData = {
+              {"sender", payload.value("sender", "anonymous")},
+              {"message", payload.value("message", "")},
+              {"timestamp", std::chrono::system_clock::now().time_since_epoch().count()}};
+          sendToRoom(room, chatData);
+          
+          // Also send confirmation to sender
+          json confirmation = {
+              {"type", "chat_sent"},
+              {"room", room},
+              {"data", chatData}};
+          conn.send_text(confirmation.dump());
+        }
         else
         {
           // Check for custom event handlers
-          std::lock_guard<std::mutex> lock(instance().mtx);
-          auto handler = instance().eventHandlers.find(type);
-          if (handler != instance().eventHandlers.end())
+          std::function<void(crow::websocket::connection &, const json &)> handler;
           {
-            handler->second(conn, payload);
+            std::lock_guard<std::mutex> lock(instance().mtx);
+            auto it = instance().eventHandlers.find(type);
+            if (it != instance().eventHandlers.end())
+            {
+              handler = it->second;
+            }
+          }
+          
+          if (handler)
+          {
+            handler(conn, payload);
           }
           else
           {
