@@ -1,5 +1,5 @@
-# Use the Ubuntu 23
-FROM ubuntu:23.04
+# Use Ubuntu 24.04 LTS
+FROM ubuntu:24.04
 
 # Update the package lists for upgrades and new package installations
 RUN apt-get update && apt-get install -y \

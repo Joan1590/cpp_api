@@ -1,5 +1,7 @@
 {
   "files.associations": {
+    "*.embeddedhtml": "html",
+    "*.php": "php",
     "string": "cpp",
     "array": "cpp",
     "memory": "cpp",
@@ -81,6 +83,18 @@
     "bitset": "cpp",
     "complex": "cpp",
     "unordered_set": "cpp",
-    "cfenv": "cpp"
-  }
+    "cfenv": "cpp",
+    "regex": "cpp",
+    "__nullptr": "cpp",
+    "__config": "cpp",
+    "__functional_03": "cpp",
+    "__hash_table": "cpp",
+    "__tree": "cpp",
+    "filesystem": "cpp",
+    "locale": "cpp",
+    "__bit_reference": "cpp",
+    "__string": "cpp",
+    "__split_buffer": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
