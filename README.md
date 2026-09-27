@@ -99,7 +99,15 @@ This project provides a lightweight and efficient C++ API framework, inspired by
    docker-compose up -d --build
    ```
 
-3. **Run the API:**
+3. **Run the database migrations** (once the API container has finished building):
+
+   ```bash
+   docker-compose exec api ./build/cpp_api -migrate
+   ```
+
+   Existing installations that still have the old `User` table get it renamed to `users` automatically, keeping its data.
+
+4. **Run the API:**
 
 The API will be accessible at http://localhost:3000
 

@@ -9,7 +9,8 @@ struct User
   std::string name;
   std::string email;
   std::string password;
-
-  // Define the schema for ormpp
-  static constexpr auto table_name = "users";
 };
+
+// ormpp schema: table "users" with auto-increment primary key "id"
+REGISTER_AUTO_KEY(User, id)
+REFLECTION_WITH_NAME(User, "users", id, name, email, password)

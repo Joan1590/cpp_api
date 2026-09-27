@@ -158,7 +158,7 @@ namespace Controllers
 
         db.delete_records_s<User>("id=?", id);
 
-        return ok({"message", "User deleted successfully"});
+        return ok({{"message", "User deleted successfully"}});
       }
       catch (const std::exception &e)
       {

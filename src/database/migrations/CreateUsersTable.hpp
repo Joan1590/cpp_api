@@ -3,9 +3,6 @@
 #include <iostream>
 #include <ormpp/dbng.hpp>
 
-REGISTER_AUTO_KEY(User, id)
-REFLECTION(User, id, name, email, password)
-
 void migrate()
 {
   try

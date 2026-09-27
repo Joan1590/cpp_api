@@ -5,6 +5,7 @@
 #include <vector>
 
 // Include your migration headers
+#include "migrations/RenameUserTable.hpp"
 #include "migrations/CreateUsersTable.hpp"
 
 class MigrationManager
@@ -16,7 +17,8 @@ public:
 
     // Create an array of migration functions
     std::vector<void (*)()> migrations = {
-        migrate, // Call CreateUsersTable::migrate()
+        renameUserTable, // Must run before CreateUsersTable to keep legacy data
+        migrate,         // Call CreateUsersTable::migrate()
                  // Add more migration functions here as needed...
     };
 
