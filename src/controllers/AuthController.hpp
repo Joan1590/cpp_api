@@ -25,26 +25,30 @@ namespace Controllers
         DatabaseManager dbManager;
         auto &db = dbManager.getDatabase();
 
-        // Query user by email
-        char buffer[256];
-        sprintf(buffer, "email='%s'", email.c_str());
-        auto result = db.query<User>(buffer);
+        // Query user by email (prepared statement)
+        auto result = db.query_s<User>("email=?", email);
 
         if (result.empty())
+        {
+          // Hash anyway so response time does not reveal whether the email exists
+          HashUtils::verifyPassword(password, dummyHash());
+          return unauthorized("Invalid email or password");
+        }
+
+        if (!HashUtils::verifyPassword(password, result[0].password))
         {
           return unauthorized("Invalid email or password");
         }
 
-        // Verify password
-        if (!verifyPassword(email, password))
+        // Upgrade legacy unsalted hashes on successful login
+        if (HashUtils::needsRehash(result[0].password))
         {
-          return unauthorized("Invalid email or password");
+          result[0].password = HashUtils::hashPassword(password);
+          db.update(result[0]);
         }
 
         // Generate JWT token
         const char *jwt_secret = Config::AppConfig::getJWTSecret();
-
-        printf("JWT secret: %s\n", jwt_secret);
 
         if (!jwt_secret)
         {
@@ -78,29 +82,10 @@ namespace Controllers
     }
 
   private:
-    static bool verifyPassword(const std::string &email, const std::string &password)
+    static const std::string &dummyHash()
     {
-      try
-      {
-        DatabaseManager dbManager;
-        auto &db = dbManager.getDatabase();
-
-        char buffer[256];
-        sprintf(buffer, "email='%s'", email.c_str());
-        auto result = db.query<User>(buffer);
-
-        if (result.empty())
-        {
-          return false;
-        }
-
-        // Compare hashed passwords
-        return result[0].password == HashUtils::sha256(password);
-      }
-      catch (const std::exception &e)
-      {
-        return false;
-      }
+      static const std::string hash = HashUtils::hashPassword("dummy-password");
+      return hash;
     }
   };
 }

@@ -47,9 +47,7 @@ namespace Controllers
         DatabaseManager dbManager;
         auto &db = dbManager.getDatabase();
 
-        char buffer[100];
-        sprintf(buffer, "id=%d", id);
-        auto result = db.query<User>(buffer);
+        auto result = db.query_s<User>("id=?", id);
 
         if (result.empty())
         {
@@ -82,12 +80,12 @@ namespace Controllers
         user.name = jsonData["name"].get<std::string>();
         user.email = jsonData["email"].get<std::string>();
         // Hash the password before storing
-        user.password = HashUtils::sha256(jsonData["password"].get<std::string>());
+        user.password = HashUtils::hashPassword(jsonData["password"].get<std::string>());
 
         db.insert(user);
 
         // Get the last inserted user
-        auto result = db.query<User>("id = LAST_INSERT_ID()");
+        auto result = db.query_s<User>("id = LAST_INSERT_ID()");
 
         json response = {
             {"message", "User created successfully"},
@@ -114,9 +112,7 @@ namespace Controllers
         DatabaseManager dbManager;
         auto &db = dbManager.getDatabase();
 
-        char buffer[100];
-        sprintf(buffer, "id=%d", id);
-        auto result = db.query<User>(buffer);
+        auto result = db.query_s<User>("id=?", id);
 
         if (result.empty())
         {
@@ -126,7 +122,7 @@ namespace Controllers
         result[0].name = jsonData["name"].get<std::string>();
         result[0].email = jsonData["email"].get<std::string>();
         // Hash the password before storing
-        result[0].password = HashUtils::sha256(jsonData["password"].get<std::string>());
+        result[0].password = HashUtils::hashPassword(jsonData["password"].get<std::string>());
 
         db.update(result[0]);
 
@@ -153,16 +149,14 @@ namespace Controllers
         DatabaseManager dbManager;
         auto &db = dbManager.getDatabase();
 
-        char buffer[100];
-        sprintf(buffer, "id=%d", id);
-        auto result = db.query<User>(buffer);
+        auto result = db.query_s<User>("id=?", id);
 
         if (result.empty())
         {
           return not_found("User not found");
         }
 
-        db.delete_records<User>(buffer);
+        db.delete_records_s<User>("id=?", id);
 
         return ok({"message", "User deleted successfully"});
       }

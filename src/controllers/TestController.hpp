@@ -5,6 +5,7 @@
 #include "../utils/StringUtils.hpp"
 #include "../utils/DateUtils.hpp"
 #include "../validation/Validator.hpp"
+#include "../utils/HashUtils.hpp"
 
 namespace Controllers
 {
@@ -136,6 +137,12 @@ namespace Controllers
 
         runner.addSuite(&validationTests);
 
+        // Hash Utils Tests
+        Testing::TestSuite hashTests("HashUtils Tests");
+        addHashTests(hashTests);
+
+        runner.addSuite(&hashTests);
+
         // Get results as JSON
         json response = runner.toJson();
 
@@ -211,12 +218,48 @@ namespace Controllers
           return ok(suite.run().toJson());
         }
 
-        return not_found("Test suite not found. Available: string, date, validation");
+        else if (suiteName == "hash")
+        {
+          Testing::TestSuite suite("HashUtils Tests");
+          addHashTests(suite);
+
+          return ok(suite.run().toJson());
+        }
+
+        return not_found("Test suite not found. Available: string, date, validation, hash");
       }
       catch (const std::exception &e)
       {
         return server_error(e.what());
       }
+    }
+
+  private:
+    static void addHashTests(Testing::TestSuite &suite)
+    {
+      suite
+          .test("hashPassword verifies correct password", []()
+                {
+            auto hash = HashUtils::hashPassword("secret123");
+            Testing::Assertions::assertTrue(HashUtils::verifyPassword("secret123", hash));
+            Testing::Assertions::assertFalse(HashUtils::verifyPassword("wrong", hash)); })
+          .test("hashPassword uses a random salt", []()
+                {
+            Testing::Assertions::assertTrue(HashUtils::hashPassword("same") != HashUtils::hashPassword("same")); })
+          .test("verifyPassword accepts legacy SHA-256 hashes", []()
+                {
+            auto legacy = HashUtils::sha256("secret123");
+            Testing::Assertions::assertTrue(HashUtils::verifyPassword("secret123", legacy));
+            Testing::Assertions::assertFalse(HashUtils::verifyPassword("wrong", legacy)); })
+          .test("needsRehash flags legacy hashes only", []()
+                {
+            Testing::Assertions::assertTrue(HashUtils::needsRehash(HashUtils::sha256("secret123")));
+            Testing::Assertions::assertFalse(HashUtils::needsRehash(HashUtils::hashPassword("secret123"))); })
+          .test("verifyPassword rejects malformed hashes", []()
+                {
+            Testing::Assertions::assertFalse(HashUtils::verifyPassword("x", ""));
+            Testing::Assertions::assertFalse(HashUtils::verifyPassword("x", "pbkdf2_sha256$abc$salt$hash"));
+            Testing::Assertions::assertFalse(HashUtils::verifyPassword("x", "md5$1$salt$hash")); });
     }
   };
 }
