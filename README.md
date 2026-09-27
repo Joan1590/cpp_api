@@ -5,9 +5,9 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 ## Features
 
 - **Fast and efficient:** Leverages CrowCpp's performance for handling HTTP requests.
-- **Database connectivity:** Supports seamless integration with MySQL and PostgreSQL.
+- **Database connectivity:** MySQL integration through the ormpp ORM (prepared statements).
 - **Middleware:** Provides middleware support for request processing and manipulation.
-- **JWT authentication:** Implements JWT (JSON Web Token) for secure API access.
+- **JWT authentication:** Implements JWT (JSON Web Token) for secure API access, with salted PBKDF2-SHA256 password hashing.
 - **Redis integration:** Utilizes Redis for caching and session management.
 - **Easy routing:** Offers a simple and intuitive routing system.
 - **Dockerized environment:** Includes Dockerfile and docker-compose for easy setup and deployment.
@@ -81,10 +81,16 @@ This project provides a lightweight and efficient C++ API framework, inspired by
 
 ## Getting Started
 
-1. **Clone the repository:**
+1. **Clone the repository (including the `libs/ormpp` submodule):**
 
    ```bash
-   git clone https://github.com/joan1590/crowcpp-api.git
+   git clone --recursive https://github.com/Joan1590/cpp_api.git
+   ```
+
+   If you already cloned it without `--recursive`, run:
+
+   ```bash
+   git submodule update --init
    ```
 
 2. **Build the project:**
@@ -103,7 +109,7 @@ The API will be accessible at http://localhost:3000
 | Feature                 | Status      | Notes                                      |
 | ----------------------- | ----------- | -----------------------------------------  |
 | Fast and efficient API  | Complete    | Uses CrowCpp.                              |
-| Database connectivity   | Complete    | Supports MySQL, PostgreSQL.                |
+| Database connectivity   | Complete    | MySQL (via ormpp).                         |
 | Middleware              | Complete    | Apply middleware to specific routes.       |
 | JWT authentication      | Complete    |                                            |
 | Redis integration       | Complete    |                                            |
